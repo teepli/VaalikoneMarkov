@@ -15,13 +15,14 @@ public class Tiedostonlukija {
             BufferedReader tiedostonLukija = new BufferedReader(new FileReader("vastaukset.csv")); 
            
         while ((line = tiedostonLukija.readLine()) != null) {                                 
-            line = line.replace(".", "");           
+            line = cleanSentence(line);
             String[] osat = line.split(";");
             
             if (osat[4].contains(puolue)) {
                 for (int i = 11; i < osat.length; i++) {
                     String osa[] = osat[i].split(" ");
-                    sanat.addAll(Arrays.asList(osa));                  
+                    if (osa.length > 0)
+                        sanat.addAll(Arrays.asList(osa));
                 }                 
             }
         }
@@ -29,5 +30,12 @@ public class Tiedostonlukija {
                 System.out.println("Virhe: " + e.getMessage());
         }
         return sanat;
+    }
+
+    public static String cleanSentence(String sentence) {
+        sentence = sentence.replace("samaa mieltä", "").replace("eri mieltä", "").
+                replace("jokseenkin", "").replace("," ,"").replace(".", "").trim();
+
+        return sentence;
     }
 }

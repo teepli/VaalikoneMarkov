@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Arrays;
+import java.lang.StringBuilder;
 
 public class MarkovBuilder {
     private Random r = new Random();
@@ -54,13 +55,17 @@ public class MarkovBuilder {
             } else   {
                 random = r.nextInt(suffix.size());              
                 markovSentence.add(suffix.get(random));
-            } 
+            }
             prefix = markovSentence.stream().skip(i).reduce("", (a, b) -> a + " " + b).trim();
-            
+
         
-        } 
-        System.out.println(markovSentence.stream().reduce("", (a, b) -> a + " " + b).replace(",", "").trim());
-    
+        }
+      // String lause = markovSentence.stream().reduce("", (a, b) -> a + " " + b)
+      //          .replace(",", "").trim();
+
+      //  String aa = lause.substring(0,1).toUpperCase() + lause.substring(1);
+
+        System.out.println(markovSentence.stream().reduce("", (a, b) -> a + " " + b).replace(",", "").trim() + ".");
     }
 }
 
